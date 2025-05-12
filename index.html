@@ -1,98 +1,98 @@
-<html lang="hr"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <title>Vrijeme</title> 
-</head>
-<body>
-    <header>
-    <h1>Dobrodosli na stranciu s vremenskom prognozom</h1>
-    </header>
-    <nav class="nav-menu">
-        <ul> 
-            <li><a href="#">Početna</a></li>
-            <li><a href="slike.html">Slike</a></li>
-            <li><a href="grafikon.html">Grafikoni</a></li>
-        </ul>
-    </nav>
+    <html lang="hr"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+        <title>Vrijeme</title> 
+    </head>
+    <body>
+        <header>
+        <h1>Dobrodosli na stranciu s vremenskom prognozom</h1>
+        </header>
+        <nav class="nav-menu">
+            <ul> 
+                <li><a href="#">Početna</a></li>
+                <li><a href="slike.html">Slike</a></li>
+                <li><a href="grafikon.html">Grafikoni</a></li>
+                <li><a href="lv4.html">LV4</a></li>
+            </ul>
+        </nav>
 
-    <h1>Vremenski Podaci</h1>
-    <div class="table-aside">
-        <table id="vrijeme-tablica">
-            <thead>
-                <th>ID</th>
-                <th>Temperature (°C)</th>
-                <th>Humidity (%)</th>
-                <th>Wind Speed (km/h)</th>
-                <th>Season</th>
-                <th>Location</th>
-                <th>Weather Type</th>
-            </thead>
-            <tbody>					
-            </tbody>
-        </table>
-
-    </div>
-    <div id="filteri">
-                <select id="filter-genre">
-                    <option value="">Odaberi Sezonu</option>
-                    <option value="Spring">Spring</option>
-                    <option value="Summer">Summer</option>
-                    <option value="Autumn">Autumn</option>
-                    <option value="Winter">Winter</option>  
-                    <input type="number" id="filter-temperature" placeholder="Temperatura od" style="max-width: 400px;">
-
-                </select>  
-                <div class="inputButtons">
-                    <input type="radio" id="inland" name="location" value="inland">
-                    <label for="inland">Inland</label>
-                    <input type="radio" id="mountain" name="location" value="mountain">
-                    <label for="mountain">Montain</label>
-                    <input type="radio" id="coastal" name="location" value="coastal">
-                    <label for="coastal">Coastal</label>
-                </div>                   
-                
-                <button id="primijeni-filtere">Filtriraj</button>
-            </div>
-    <div class="tableAndAside">
-        <div class="tableAndButton">
-            <table id="vrijeme-tablica2">
+        <h1>Vremenski Podaci</h1>
+        <div class="table-aside">
+            <table id="vrijeme-tablica">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Temperature (°C)</th>
-                        <th>Humidity (%)</th>
-                        <th>Wind Speed (km/h)</th>
-                        <th>Season</th>
-                        <th>Location</th>
-                        <th>Weather Type</th>
-                    </tr>
-                <tbody>
+                    <th>ID</th>
+                    <th>Temperature (°C)</th>
+                    <th>Humidity (%)</th>
+                    <th>Wind Speed (km/h)</th>
+                    <th>Season</th>
+                    <th>Location</th>
+                    <th>Weather Type</th>
+                </thead>
+                <tbody>					
                 </tbody>
             </table>
-            <div>
-                <button id="add-to-cart" onclick="addToCart()">Add to Cart</button>
-            </div>
+
         </div>
-        <aside>
-            <div>
-                <section id="kosarica-content">
-                    <h2>Moja kosarica</h2>
-                    <ul id="lista-kosarice">
-                    </ul>
-                    <button id="potvrdi-kosaricu" onclick="obrisiSve()">Potvrdi odabir</button>
-                </section>
+        <div id="filteri">
+                    <select id="filter-genre">
+                        <option value="">Odaberi Sezonu</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Autumn">Autumn</option>
+                        <option value="Winter">Winter</option>  
+                        <input type="number" id="filter-temperature" placeholder="Temperatura od" style="max-width: 400px;">
+
+                    </select>  
+                    <div class="inputButtons">
+                        <input type="radio" id="inland" name="location" value="inland">
+                        <label for="inland">Inland</label>
+                        <input type="radio" id="mountain" name="location" value="mountain">
+                        <label for="mountain">Montain</label>
+                        <input type="radio" id="coastal" name="location" value="coastal">
+                        <label for="coastal">Coastal</label>
+                    </div>                   
+                    <button id="primijeni-filtere">Filtriraj</button>
+                </div>
+        <div class="tableAndAside">
+            <div class="tableAndButton">
+                <table id="vrijeme-tablica2">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Temperature (°C)</th>
+                            <th>Humidity (%)</th>
+                            <th>Wind Speed (km/h)</th>
+                            <th>Season</th>
+                            <th>Location</th>
+                            <th>Weather Type</th>
+                        </tr>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div>
+                    <button id="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                </div>
             </div>
-        </aside>
-    </div>
+            <aside>
+                <div>
+                    <section id="kosarica-content">
+                        <h2>Moja kosarica</h2>
+                        <ul id="lista-kosarice">
+                        </ul>
+                        <button id="potvrdi-kosaricu" onclick="obrisiSve()">Potvrdi odabir</button>
+                    </section>
+                </div>
+            </aside>
+        </div>
 
 
 
-    <footer>
-    <p>© 2025. Web Programiranje. Sva prava pridrzana.</p>
-    </footer>
-    <script src="script.js"></script>
+        <footer>
+        <p>© 2025. Web Programiranje. Sva prava pridrzana.</p>
+        </footer>
+        <script src="script.js"></script>
 
-</body>
-</html>
+    </body>
+    </html>
