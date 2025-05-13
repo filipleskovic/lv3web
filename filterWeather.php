@@ -1,5 +1,7 @@
 <?php
 header('Content-Type: application/json');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 $servername = "localhost";
 $username = "root";
@@ -17,28 +19,33 @@ $season = $_GET['season'] ?? '';
 $min_temp = isset($_GET['min_temperature']) ? (int)$_GET['min_temperature'] : null;
 $location = $_GET['location'] ?? '';
 
-$sql = "SELECT id, temperature, humidity, wind_speed, season, location, weather_type FROM vrijeme WHERE 1=1";
+$sql = "SELECT id, temperature, humidity, wind_speed, season, location, weather_type FROM wheaters  WHERE 1=1";
 $params = [];
+$types = '';
 
 if (!empty($season)) {
     $sql .= " AND season = ?";
     $params[] = $season;
+    $types .= 's';
 }
 if (!is_null($min_temp)) {
     $sql .= " AND temperature >= ?";
     $params[] = $min_temp;
+    $types .= 'i';
 }
 if (!empty($location)) {
     $sql .= " AND location = ?";
     $params[] = $location;
+    $types .= 's';
 }
 
 $stmt = mysqli_prepare($conn, $sql);
+if ($stmt === false) {
+    echo json_encode(['error' => 'Greška u pripremi upita.', 'sql' => $sql]);
+    exit;
+}
+
 if (!empty($params)) {
-    $types = '';
-    foreach ($params as $p) {
-        $types .= is_int($p) ? 'i' : 's';
-    }
     mysqli_stmt_bind_param($stmt, $types, ...$params);
 }
 
@@ -54,3 +61,4 @@ mysqli_stmt_close($stmt);
 mysqli_close($conn);
 
 echo json_encode($data);
+?>

@@ -4,7 +4,7 @@ document.getElementById('primijeni-filtere').addEventListener('click', () => {
     const selectedLocation = document.querySelector('input[name="location"]:checked');
     const locationValue = selectedLocation ? selectedLocation.value : "";
 
-    const url = new URL('filterWeather.php', window.location.origin);
+    const url = new URL('lv3web/filterWeather.php', window.location.origin);
     const params = new URLSearchParams();
 
     if (selectedSeason) params.append('season', selectedSeason);
@@ -12,8 +12,10 @@ document.getElementById('primijeni-filtere').addEventListener('click', () => {
     if (locationValue) params.append('location', locationValue);
 
     url.search = params.toString();
+    console.log(url)
 
     fetch(url)
+
         .then(response => response.json())
         .then(data => {
             prikaziTablicu(data, '#vrijeme-tablica2 tbody');

@@ -219,8 +219,9 @@ aside img:hover{
 }
 .inputButtons{
     display: flex;
-    max-width: 200px;
+    max-width: 250px;
     flex-direction: row;
+    
 }
 .tableAndAside{
     display: flex;

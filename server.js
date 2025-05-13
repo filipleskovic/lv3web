@@ -7,7 +7,6 @@ const port = 3000;
 const server = http.createServer((req, res) => {
   console.log('Zahtev za: ', req.url);
 
-  // Ako traži samo / , pošalji index.html
   let filePath = req.url === '/' ? './index.html' : '.' + req.url;
 
   const extname = String(path.extname(filePath)).toLowerCase();
