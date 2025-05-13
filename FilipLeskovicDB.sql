@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2025 at 09:51 AM
+-- Generation Time: May 13, 2025 at 05:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,72 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `images`
+--
+
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL,
+  `url` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `url`) VALUES
+(1, 'https://images.unsplash.com/photo-1744968776876-283d9ae15eb0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+(2, 'https://plus.unsplash.com/premium_photo-1747054588576-f6bd489758f0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+(3, 'https://images.unsplash.com/photo-1744148070187-b3815f7a9dbc?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+(4, 'https://plus.unsplash.com/premium_photo-1746731481770-08b2f71661d0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plan`
+--
+
+CREATE TABLE `plan` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `weatherId` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `plan`
+--
+
+INSERT INTO `plan` (`id`, `userId`, `weatherId`) VALUES
+(109, 2, 'W3490'),
+(110, 2, 'W6378'),
+(135, 5, 'W10994'),
+(136, 5, 'W3490');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rate`
+--
+
+CREATE TABLE `rate` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `imageId` int(11) NOT NULL,
+  `rate` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rate`
+--
+
+INSERT INTO `rate` (`id`, `userId`, `imageId`, `rate`) VALUES
+(1, 1, 1, 4),
+(2, 1, 2, 4),
+(3, 5, 2, 5),
+(4, 5, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -31,8 +97,21 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(30) NOT NULL,
+  `hash` varchar(100) NOT NULL,
+  `isAdmin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `hash`, `isAdmin`) VALUES
+(1, 'Filip', 'filipleskovic@gmail.com', '12345678', '$2y$10$pkjPYXgmOs2gAUz.ddJnDOCq6tyvSLWmrS9V0rS3E5JMUhQ4/SrIq', 0),
+(2, 'Filip', 'filipleskovic6@gmail.com', '12345678', '$2y$10$GXmzO9RXPJEAeFMMwGNl2.7o7IrjVvwerDG4ufAdF3U6hmhTHaRI6', 0),
+(3, 'Filip', 'filipleskovic1@gmail.com', '12345678', '$2y$10$jHOHbB1yrpCqY.sM6u0b3eNAFiBLMTi4Mp0eyAZI2n5bqxgqzQOqe', 0),
+(4, 'Filip', 'filipleskovic2@gmail.com', '12345678', '$2y$10$/EDFWngz476lzJeCcbZmpu20FJ0podz26OtonbkKIUY0Ij1rMKnbu', 0),
+(5, 'admin', 'admin@admin.com', '12345678', '$2y$10$x1AKNnMyUk2IO93i.Lq./OHZie5rQuIU4cDgDyd9E4mPyXIyUwDcS', 1);
 
 -- --------------------------------------------------------
 
@@ -55,6 +134,8 @@ CREATE TABLE `wheaters` (
 --
 
 INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location`, `season`, `weather_type`) VALUES
+('12345', 35, 31, 53.00, 'mountain', 'summer', 'cloudy'),
+('AAAA1', 23, 12, 42.00, 'inland', 'spring', 'cloudy'),
 ('W100', 31, 72, 17.00, 'inland', 'Winter', 'Cloudy'),
 ('W10000', 27, 78, 13.00, 'mountain', 'Spring', 'Cloudy'),
 ('W10001', 48, 38, 10.00, 'coastal', 'Winter', 'Snowy'),
@@ -964,10 +1045,10 @@ INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location
 ('W12812', 26, 98, 11.00, 'coastal', 'Summer', 'Rainy'),
 ('W12815', 72, 88, 12.00, 'coastal', 'Winter', 'Sunny'),
 ('W12817', 65, 83, 23.50, 'coastal', 'Winter', 'Rainy'),
-('W1282', 24, 71, 10.50, 'coastal', 'Winter', 'Cloudy'),
-('W12822', 27, 60, 3.50, 'coastal', 'Summer', 'Sunny'),
-('W12829', 43, 43, 7.50, 'coastal', 'Summer', 'Sunny');
+('W1282', 24, 71, 10.50, 'coastal', 'Winter', 'Cloudy');
 INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location`, `season`, `weather_type`) VALUES
+('W12822', 27, 60, 3.50, 'coastal', 'Summer', 'Sunny'),
+('W12829', 43, 43, 7.50, 'coastal', 'Summer', 'Sunny'),
 ('W12834', 3, 93, 1.50, 'mountain', 'Winter', 'Snowy'),
 ('W12835', 42, 52, 6.50, 'inland', 'Winter', 'Rainy'),
 ('W12838', -4, 62, 3.50, 'inland', 'Spring', 'Cloudy'),
@@ -1892,10 +1973,10 @@ INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location
 ('W3744', 34, 48, 9.00, 'mountain', 'Winter', 'Sunny'),
 ('W3751', 33, 79, 2.50, 'inland', 'Autumn', 'Cloudy'),
 ('W3756', 29, 91, 7.00, 'mountain', 'Winter', 'Rainy'),
-('W3760', 28, 83, 5.50, 'coastal', 'Summer', 'Rainy'),
-('W3763', 34, 48, 6.50, 'coastal', 'Summer', 'Sunny'),
-('W3767', 18, 77, 10.50, 'inland', 'Summer', 'Cloudy');
+('W3760', 28, 83, 5.50, 'coastal', 'Summer', 'Rainy');
 INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location`, `season`, `weather_type`) VALUES
+('W3763', 34, 48, 6.50, 'coastal', 'Summer', 'Sunny'),
+('W3767', 18, 77, 10.50, 'inland', 'Summer', 'Cloudy'),
 ('W3769', 22, 67, 11.00, 'inland', 'Autumn', 'Rainy'),
 ('W3778', 23, 60, 5.00, 'coastal', 'Spring', 'Sunny'),
 ('W3780', 15, 53, 8.50, 'mountain', 'Summer', 'Cloudy'),
@@ -2823,10 +2904,10 @@ INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location
 ('W653', 29, 103, 22.50, 'inland', 'Summer', 'Rainy'),
 ('W6530', 24, 88, 17.50, 'inland', 'Spring', 'Rainy'),
 ('W6536', 27, 49, 7.50, 'inland', 'Summer', 'Sunny'),
-('W6539', 49, 83, 0.00, 'inland', 'Autumn', 'Cloudy'),
-('W6543', 32, 53, 4.50, 'coastal', 'Spring', 'Cloudy'),
-('W655', 36, 78, 12.50, 'inland', 'Winter', 'Cloudy');
+('W6539', 49, 83, 0.00, 'inland', 'Autumn', 'Cloudy');
 INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location`, `season`, `weather_type`) VALUES
+('W6543', 32, 53, 4.50, 'coastal', 'Spring', 'Cloudy'),
+('W655', 36, 78, 12.50, 'inland', 'Winter', 'Cloudy'),
 ('W6553', 28, 33, 8.00, 'mountain', 'Summer', 'Sunny'),
 ('W6554', -20, 52, 3.50, 'mountain', 'Autumn', 'Snowy'),
 ('W6555', 22, 50, 4.50, 'mountain', 'Summer', 'Cloudy'),
@@ -3754,10 +3835,10 @@ INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location
 ('W957', 34, 63, 19.00, 'inland', 'Autumn', 'Rainy'),
 ('W9570', 27, 69, 13.00, 'inland', 'Spring', 'Cloudy'),
 ('W9571', 33, 56, 9.50, 'coastal', 'Summer', 'Sunny'),
-('W9574', 25, 65, 11.50, 'mountain', 'Autumn', 'Cloudy'),
-('W9577', 20, 50, 11.50, 'mountain', 'Winter', 'Cloudy'),
-('W9578', 24, 87, 19.50, 'coastal', 'Winter', 'Rainy');
+('W9574', 25, 65, 11.50, 'mountain', 'Autumn', 'Cloudy');
 INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location`, `season`, `weather_type`) VALUES
+('W9577', 20, 50, 11.50, 'mountain', 'Winter', 'Cloudy'),
+('W9578', 24, 87, 19.50, 'coastal', 'Winter', 'Rainy'),
 ('W9581', 20, 44, 2.00, 'inland', 'Spring', 'Sunny'),
 ('W9586', 29, 64, 9.00, 'coastal', 'Winter', 'Rainy'),
 ('W9589', -2, 93, 12.00, 'mountain', 'Winter', 'Snowy'),
@@ -3874,11 +3955,30 @@ INSERT INTO `wheaters` (`id`, `temperature`, `humidity`, `wind_speed`, `location
 ('W9987', 21, 69, 9.00, 'mountain', 'Spring', 'Cloudy'),
 ('W9993', 35, 65, 6.50, 'mountain', 'Autumn', 'Sunny'),
 ('W9994', 17, 88, 14.50, 'mountain', 'Autumn', 'Rainy'),
-('W9998', 23, 22, 9.00, 'coastal', 'Spring', 'Sunny');
+('W9998', 23, 22, 9.00, 'coastal', 'Spring', 'Sunny'),
+('WPLO2', 64, 24, 51.00, 'mountain', 'autumn', 'cloudy');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `plan`
+--
+ALTER TABLE `plan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rate`
+--
+ALTER TABLE `rate`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -3891,6 +3991,34 @@ ALTER TABLE `users`
 --
 ALTER TABLE `wheaters`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `images`
+--
+ALTER TABLE `images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `plan`
+--
+ALTER TABLE `plan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+
+--
+-- AUTO_INCREMENT for table `rate`
+--
+ALTER TABLE `rate`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
